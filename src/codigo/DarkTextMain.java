@@ -26,21 +26,42 @@ public class DarkTextMain {
 			System.out.println("Deseja utilizar o modo criativo \n 1-sim \n qualquer outra tecla pra não ");
 			op = Integer.valueOf(leitura.nextLine());
 			if (op == 1) {
-				
+			System.out.println("O que deseja fazer? \n 0-sair \n 1-alterar nome \n 2-listar os atributos dos inimigos \n 3-adicionar inimigo \n 4-remover área");
+			op = Integer.valueOf(leitura.nextLine());
 			switch (op) {
 			case 0: {
 				break;
 			}
 			case 1: {
-
+				System.out.println("Qual seu novo nome");
+				jogador.setNome(leitura.nextLine());
 				break;
 			}
 			case 2: {
 
 				break;
+<<<<<<< HEAD
 			}}
+			} else {
+				System.out.println("Você entrou no modo arcade Qual sua classe?\n1-Cavaleiro\n 2-Mago\n 3-Clérico\n");
+				op = Integer.valueOf(leitura.nextLine());
+				if (op==1) {
+					System.out.println("fudi sua mae kkkkkk");
+					
+				}
+				
+=======
+>>>>>>> main
 			}
-
+			case 3: {
+				break;
+			}
+			case 4: {
+				break;
+			}
+			}
+			}
+			System.out.println(jogador.getNome());
 		}
 
 		leitura.close();
