@@ -40,18 +40,7 @@ public class DarkTextMain {
 			case 2: {
 
 				break;
-<<<<<<< HEAD
-			}}
-			} else {
-				System.out.println("Você entrou no modo arcade Qual sua classe?\n1-Cavaleiro\n 2-Mago\n 3-Clérico\n");
-				op = Integer.valueOf(leitura.nextLine());
-				if (op==1) {
-					System.out.println("fudi sua mae kkkkkk");
-					
-				}
-				
-=======
->>>>>>> main
+
 			}
 			case 3: {
 				break;
