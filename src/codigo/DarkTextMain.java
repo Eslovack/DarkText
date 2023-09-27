@@ -11,33 +11,34 @@ public class DarkTextMain {
 
 		Integer op = Integer.MAX_VALUE;
 		Scanner leitura = new Scanner(System.in);
+		Jogador jogador = new Jogador();
 
 		while (op != 0) {
+			
 			System.out.println("Bem vindo deseja começar sua Aventura? \n 1-Sim \n 2-Não");
 			op = Integer.valueOf(leitura.nextLine());
 			if (op == 2) {
 				break;
 			}
 			System.out.println("Qual seu nome");
-
+			jogador.setNome(leitura.nextLine());
+			
+			System.out.println("Deseja utilizar o modo criativo \n 1-sim \n qualquer outra tecla pra não ");
 			op = Integer.valueOf(leitura.nextLine());
-
+			if (op == 1) {
+				
 			switch (op) {
 			case 0: {
 				break;
 			}
 			case 1: {
-				System.out.println("Nome:");
-				String nome = leitura.nextLine();
-				System.out.println("Cpf:");
-				String cpf = leitura.nextLine();
 
+				break;
 			}
 			case 2: {
-				System.out.println("Digite o cpf da pessoa que deseja alterar:");
 
-			}
-
+				break;
+			}}
 			}
 
 		}
