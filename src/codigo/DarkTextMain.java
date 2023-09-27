@@ -3,6 +3,8 @@ package codigo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 public class DarkTextMain {
 
 	public static void main(String[] args) {
@@ -22,7 +24,7 @@ public class DarkTextMain {
 
 			switch (op) {
 			case 0: {
-
+				System.out.println("Git é mágico");
 				break;
 			}
 			case 1: {
