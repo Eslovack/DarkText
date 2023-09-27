@@ -24,7 +24,6 @@ public class DarkTextMain {
 
 			switch (op) {
 			case 0: {
-				System.out.println("Git é mágico");
 				break;
 			}
 			case 1: {
