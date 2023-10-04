@@ -4,13 +4,14 @@ public class Inimigo {
 
 	private String nome;
 	private String area;
-	private Float force;
-	private Float vida;
-	private Float vidaMax;
-	private Float manaMax;
-	private Float mana;
-	private Float velociadeMax;
-	private Float velocidade;
+	private Double force;
+	private Double vida;
+	private Double vidaMax;
+	private Double manaMax;
+	private Double mana;
+	private Double velociadeMax;
+	private Double velocidade;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -24,46 +25,46 @@ public class Inimigo {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public Float getForce() {
+	public Double getForce() {
 		return force;
 	}
-	public void setForce(Float force) {
+	public void setForce(Double force) {
 		this.force = force;
 	}
-	public Float getVida() {
+	public Double getVida() {
 		return vida;
 	}
-	public void setVida(Float vida) {
+	public void setVida(Double vida) {
 		this.vida = vida;
 	}
-	public Float getVidaMax() {
+	public Double getVidaMax() {
 		return vidaMax;
 	}
-	public void setVidaMax(Float vidaMax) {
+	public void setVidaMax(Double vidaMax) {
 		this.vidaMax = vidaMax;
 	}
-	public Float getManaMax() {
+	public Double getManaMax() {
 		return manaMax;
 	}
-	public void setManaMax(Float manaMax) {
+	public void setManaMax(Double manaMax) {
 		this.manaMax = manaMax;
 	}
-	public Float getMana() {
+	public Double getMana() {
 		return mana;
 	}
-	public void setMana(Float mana) {
+	public void setMana(Double mana) {
 		this.mana = mana;
 	}
-	public Float getVelociadeMax() {
+	public Double getVelociadeMax() {
 		return velociadeMax;
 	}
-	public void setVelociadeMax(Float velociadeMax) {
+	public void setVelociadeMax(Double velociadeMax) {
 		this.velociadeMax = velociadeMax;
 	}
-	public Float getVelocidade() {
+	public Double getVelocidade() {
 		return velocidade;
 	}
-	public void setVelocidade(Float velocidade) {
+	public void setVelocidade(Double velocidade) {
 		this.velocidade = velocidade;
 	}
 	
