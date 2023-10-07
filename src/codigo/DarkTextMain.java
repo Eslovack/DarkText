@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 
-
 public class DarkTextMain {
 
 	public static void main(String[] args) {
 
 		Integer op = Integer.MAX_VALUE;
 		Scanner leitura = new Scanner(System.in);
-		Random random = new Random();
 		Jogador jogador = new Jogador();
+		Inimigo inimigo = new Inimigo();
 
 		while (op != 0) {// ----------------------------------------------------------------
-			
+
 			System.out.println("Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim");
 			op = Integer.valueOf(leitura.nextLine());
 			if (op == 0) {
@@ -27,8 +26,10 @@ public class DarkTextMain {
 
 			criativo(jogador);
 			classe(jogador);
-			atributos(jogador);
-			escolherArea();
+			atributos(jogador, inimigo, "j");
+			escolherArea(inimigo);
+			atributos(jogador, inimigo, "i");
+			velocidade(jogador, inimigo);
 
 			// System.out.println(jogador.getNome()); //testar troca de nome
 
@@ -118,25 +119,94 @@ public class DarkTextMain {
 		}
 	}
 
-	public static void atributos(Jogador jogador) {
-		System.out.println("Classe - "+jogador.getClasse());
-		System.out.println("Vida - "+jogador.getVidaMax());
-		System.out.println("Força - "+jogador.getForce());
-		System.out.println("Velocidade - "+jogador.getVelociadeMax());
-		System.out.println("");
+	public static void atributos(Jogador jogador, Inimigo inimigo, String op) {
+		if (op == "j") {
+			System.out.println("Classe - " + jogador.getClasse());
+			System.out.println("Vida - " + jogador.getVidaMax());
+			System.out.println("Mana - " + jogador.getManaMax());
+			System.out.println("Força - " + jogador.getForce());
+			System.out.println("Velocidade - " + jogador.getVelociadeMax());
+			System.out.println("");
+		} else if (op == "i") {
+			System.out.println("Nome - " + inimigo.getNome());
+			System.out.println("Vida - " + inimigo.getVidaMax());
+			System.out.println("Mana - " + inimigo.getManaMax());
+			System.out.println("Força - " + inimigo.getForce());
+			System.out.println("Velocidade - " + inimigo.getVelociadeMax());
+			System.out.println("");
+		}
 	}
 
-	public static void escolherArea() {
-		
+	public static void escolherArea(Inimigo inimigo) {
+
 		Integer op = Integer.MAX_VALUE;
 		Scanner leitura = new Scanner(System.in);
-		
+
 		System.out.println("Aonde deseja se aventurar? \n 1-Floresta");
 		op = Integer.valueOf(leitura.nextLine());
-		
-		switch(op) {
+
+		switch (op) {
 		case 1:
+			florestaInimigo(inimigo);
+			System.out.println("Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+			System.out.println("");
 			break;
+		}
+	}
+
+	public static void florestaInimigo(Inimigo inimigo) {
+		Random random = new Random();
+		Integer op = random.nextInt(0, 101);
+
+		if (op < 50) {
+			inimigo.setNome("goblin");
+			inimigo.setVidaMax(80.0);
+			inimigo.setVida(80.0);
+			inimigo.setForce(15.0);
+			inimigo.setManaMax(0.0);
+			inimigo.setMana(0.0);
+			inimigo.setVelociadeMax(45.0);
+			inimigo.setVelocidade(45.0);
+		} else if (op >= 50) {
+			inimigo.setNome("lobo selvagem");
+			inimigo.setVidaMax(80.0);
+			inimigo.setVida(80.0);
+			inimigo.setForce(12.0);
+			inimigo.setManaMax(0.0);
+			inimigo.setMana(0.0);
+			inimigo.setVelociadeMax(70.0);
+			inimigo.setVelocidade(70.0);
+		}
+	}
+
+	public static void velocidade(Jogador jogador, Inimigo inimigo) {
+		if (jogador.getVelocidade() > inimigo.getVelocidade()) {
+			jogador.setVelocidade(jogador.getVelocidade() - inimigo.getVelociadeMax());
+			inimigo.setVelocidade(inimigo.getVelociadeMax());
+
+		} else {
+			inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelociadeMax());
+			jogador.setVelocidade(jogador.getVelociadeMax());
+		}
+
+	}
+
+	public static void menuAction(Jogador jogador) {
+		System.out.println("Sua vez");
+	}
+
+	public static void tela(Jogador jogador, Inimigo inimigo, String op) {
+		if (op == "j") {
+			System.out.println(jogador.getNome());
+			System.out.println("Vida - " + jogador.getVida());
+			System.out.println("Mana - " + jogador.getMana());
+			System.out.println("");
+		} else if (op == "i") {
+			System.out.println(inimigo.getNome());
+			System.out.println("Vida - " + inimigo.getVida());
+			System.out.println("Mana - " + inimigo.getMana());
+			System.out.println("");
+
 		}
 	}
 }
