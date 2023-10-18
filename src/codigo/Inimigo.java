@@ -11,7 +11,7 @@ public class Inimigo extends Personagem{
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public static void ataque(Inimigo inimigo, Jogador jogador) {
+	public void ataque(Inimigo inimigo, Jogador jogador) {
 		jogador.setVida(jogador.getVida() - inimigo.getForce());
 	}
 }
