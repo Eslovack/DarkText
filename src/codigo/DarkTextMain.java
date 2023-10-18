@@ -3,6 +3,9 @@ package codigo;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+
+
+
 import java.util.Random;
 
 public class DarkTextMain {
@@ -16,6 +19,7 @@ public class DarkTextMain {
 
 		while (op != 0) {// ----------------------------------------------------------------
 			op = Integer.valueOf(JOptionPane.showInputDialog(null, "Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim"));
+
 			if (op == 0) {
 				break;
 			}

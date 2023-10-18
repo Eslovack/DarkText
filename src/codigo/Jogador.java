@@ -10,5 +10,7 @@ public class Jogador extends Personagem{
 	public void setClasse(String classe) {
 		this.classe = classe;
 	}
-
+	public static void corteEspada(Inimigo inimigo, Jogador jogador) {
+		inimigo.setVida(inimigo.getVida() - jogador.getForce());
+	}
 }
