@@ -3,7 +3,6 @@ package codigo;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-
 import java.util.Random;
 
 public class DarkTextMain {
@@ -18,7 +17,8 @@ public class DarkTextMain {
 
 		while (op != 0) {// ----------------------------------------------------------------
 			op = Integer.valueOf(JOptionPane.showInputDialog(null,
-					"Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim"));
+					"Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim")); // Conirmar
+																											// dialogo!!!!!!!!!!1!!1
 
 			if (op == 0) {
 				break;
@@ -28,10 +28,11 @@ public class DarkTextMain {
 			criativo(jogador);
 			classe(jogador);
 			atributos(jogador, inimigo, "j");
-			escolherArea(inimigo);
-			atributos(jogador, inimigo, "i");
-			combate(jogador, inimigo, vitoria, op);
-
+			while (vitoria == 2) {
+				escolherArea(inimigo);
+				atributos(jogador, inimigo, "i");
+				combate(jogador, inimigo, vitoria, op);
+			}
 			// System.out.println(jogador.getNome()); //testar troca de nome
 
 		} // ----------------------------------------------------------------------------------
@@ -135,8 +136,7 @@ public class DarkTextMain {
 		case 1:
 			florestaInimigo(inimigo);
 
-			JOptionPane.showMessageDialog(null,
-					"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+			JOptionPane.showMessageDialog(null,"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
 			break;
 		}
 	}
@@ -172,7 +172,7 @@ public class DarkTextMain {
 			inimigo.setVelocidade(inimigo.getVelociadeMax());
 			return 1;
 
-		} else {
+		} else{
 			inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelociadeMax());
 			jogador.setVelocidade(jogador.getVelociadeMax());
 			return 2;
@@ -181,32 +181,33 @@ public class DarkTextMain {
 	}
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria, int op) {
-
+		jogador.setFugir(0);
 		while (vitoria == 2) {
-
+			velocidade(jogador, inimigo);
 			if (velocidade(jogador, inimigo) == 1) {
-
+				//JOptionPane.showMessageDialog(null, "entrou");
 				menuAction(jogador, inimigo, op);
 
-			} else {
+			} else if (velocidade(jogador, inimigo) == 2) {
+				JOptionPane.showMessageDialog(null, inimigo.getNome()+" te atacou");
 				inimigo.ataque(inimigo, jogador);
-
+			}
+			if (jogador.getFugir() == 1) {
+				break;
 			}
 		}
 	}
 
-	public static void menuAction(Jogador jogador, Inimigo inimigo,int op) {
-		
-		
-		JOptionPane.showMessageDialog(null, "\n Sua vez");
-		op = Integer.valueOf(JOptionPane.showInputDialog(jogador.getNome() + 
-				"\n Vida: " +jogador.getVida() + 
-				"\n Mana: " +jogador.getMana() + 
-				"\n" + inimigo.getNome() + 
-				"\n Vida: " + inimigo.getVida() + 
-				"\n Mana: " + inimigo.getMana() + 
-				"\n 1-Habilidade" + 
-				"\n 2-Fugir"));
+	public static void menuAction(Jogador jogador, Inimigo inimigo, int op) {
 
+		JOptionPane.showMessageDialog(null, "\n Sua vez");
+		op = Integer.valueOf(JOptionPane.showInputDialog(jogador.getNome() + "\n Vida: " + jogador.getVida()
+				+ "\n Mana: " + jogador.getMana() +"\n"+jogador.getVelocidade()+ "\n" + inimigo.getNome() + "\n Vida: " + inimigo.getVida()
+				+ "\n Mana: " + inimigo.getMana()+"\n"+inimigo.getVelocidade() + "\n 1-Habilidade" + "\n 2-Fugir"));
+		if (op == 1) {
+			jogador.corteEspada(inimigo, jogador);
+		} else if (op == 2) {
+			jogador.setFugir(1);
+		}
 	}
 }
