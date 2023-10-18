@@ -2,27 +2,25 @@ package codigo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import java.util.Random;
 
 public class DarkTextMain {
 
 	public static void main(String[] args) {
 
-		Integer op = Integer.MAX_VALUE;
+		int op = Integer.MAX_VALUE;
 		Scanner leitura = new Scanner(System.in);
 		Jogador jogador = new Jogador();
 		Inimigo inimigo = new Inimigo();
 
 		while (op != 0) {// ----------------------------------------------------------------
-
-			System.out.println("Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim");
-			op = Integer.valueOf(leitura.nextLine());
+			op = Integer.valueOf(JOptionPane.showInputDialog(null, "Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim"));
 			if (op == 0) {
 				break;
 			}
-
-			System.out.println("Qual seu nome");
-			jogador.setNome(leitura.nextLine());
+			jogador.setNome(JOptionPane.showInputDialog(null,"Qual seu nome"));
+			
 
 			criativo(jogador);
 			classe(jogador);
@@ -41,26 +39,16 @@ public class DarkTextMain {
 	public static void criativo(Jogador jogador) {
 
 		Integer op = Integer.MAX_VALUE;
-		Scanner leitura = new Scanner(System.in);
-
-		System.out.println("Deseja utilizar o modo criativo \n 1-sim \n qualquer outro número pra não ");
-		op = Integer.valueOf(leitura.nextLine());
-
+		op = Integer.valueOf(JOptionPane.showInputDialog(null,"Deseja utilizar o modo criativo \n 1-sim \n qualquer outro número pra não "));
 		if (op == 1) {
-
-			System.out.println(
-					"O que deseja fazer? \n 0-sair \n 1-alterar nome \n 2-listar os atributos dos inimigos \n 3-adicionar inimigo \n 4-remover área");
-			op = Integer.valueOf(leitura.nextLine());
+			op = Integer.valueOf(JOptionPane.showInputDialog(null,"O que deseja fazer? \n 0-sair \n 1-alterar nome \n 2-listar os atributos dos inimigos \n 3-adicionar inimigo \n 4-remover área"));
 
 			switch (op) {
 			case 0: {
 				break;
 			}
 			case 1: {
-
-				System.out.println("Qual seu novo nome");
-				jogador.setNome(leitura.nextLine());
-
+				jogador.setNome(JOptionPane.showInputDialog("Qual seu novo nome"));
 				break;
 			}
 			case 2: {
@@ -81,10 +69,8 @@ public class DarkTextMain {
 	public static void classe(Jogador jogador) {
 
 		Integer op = Integer.MAX_VALUE;
-		Scanner leitura = new Scanner(System.in);
-
-		System.out.println("Escolha sua classe \n 1-Cavaleiro \n 2-Mago \n 3-Clérico");
-		op = Integer.valueOf(leitura.nextLine());
+		
+		op = Integer.valueOf(JOptionPane.showInputDialog("Escolha sua classe \n 1-Cavaleiro \n 2-Mago \n 3-Clérico"));
 		switch (op) {
 		case 1:
 			jogador.setClasse("Cavaleiro");
@@ -121,35 +107,32 @@ public class DarkTextMain {
 
 	public static void atributos(Jogador jogador, Inimigo inimigo, String op) {
 		if (op == "j") {
-			System.out.println("Classe - " + jogador.getClasse());
-			System.out.println("Vida - " + jogador.getVidaMax());
-			System.out.println("Mana - " + jogador.getManaMax());
-			System.out.println("Força - " + jogador.getForce());
-			System.out.println("Velocidade - " + jogador.getVelociadeMax());
-			System.out.println("");
+			JOptionPane.showMessageDialog(null,"Classe - " + jogador.getClasse() +
+			"\n Vida - " + jogador.getVidaMax() + 
+			"\n Mana - " + jogador.getManaMax() + 
+			"\n Força - " + jogador.getForce() + 
+			"\n Velocidade - " + jogador.getVelociadeMax()); 
 		} else if (op == "i") {
-			System.out.println("Nome - " + inimigo.getNome());
-			System.out.println("Vida - " + inimigo.getVidaMax());
-			System.out.println("Mana - " + inimigo.getManaMax());
-			System.out.println("Força - " + inimigo.getForce());
-			System.out.println("Velocidade - " + inimigo.getVelociadeMax());
-			System.out.println("");
+			
+			JOptionPane.showMessageDialog(null,"Nome - " + inimigo.getNome() +
+			"\n Vida - " + inimigo.getVidaMax() + 
+			"\n Mana - " + inimigo.getManaMax() + 
+			"\n Força - " + inimigo.getForce() + 
+			"\n Velocidade - " + inimigo.getVelociadeMax()); 
 		}
 	}
 
 	public static void escolherArea(Inimigo inimigo) {
 
 		Integer op = Integer.MAX_VALUE;
-		Scanner leitura = new Scanner(System.in);
-
-		System.out.println("Aonde deseja se aventurar? \n 1-Floresta");
-		op = Integer.valueOf(leitura.nextLine());
+		
+		op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta"));
 
 		switch (op) {
 		case 1:
 			florestaInimigo(inimigo);
-			System.out.println("Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
-			System.out.println("");
+			
+			JOptionPane.showMessageDialog(null, "Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
 			break;
 		}
 	}
@@ -192,20 +175,24 @@ public class DarkTextMain {
 	}
 
 	public static void menuAction(Jogador jogador) {
-		System.out.println("Sua vez");
+		JOptionPane.showMessageDialog(null,"Sua vez");
+		//System.out.println("Sua vez");
 	}
 
 	public static void tela(Jogador jogador, Inimigo inimigo, String op) {
 		if (op == "j") {
-			System.out.println(jogador.getNome());
-			System.out.println("Vida - " + jogador.getVida());
-			System.out.println("Mana - " + jogador.getMana());
-			System.out.println("");
+			
+			JOptionPane.showMessageDialog(null, jogador.getNome()+
+					"\n Vida - " + jogador.getVida() +
+					"\n Mana - " + jogador.getMana());
+
+			
 		} else if (op == "i") {
-			System.out.println(inimigo.getNome());
-			System.out.println("Vida - " + inimigo.getVida());
-			System.out.println("Mana - " + inimigo.getMana());
-			System.out.println("");
+			JOptionPane.showMessageDialog(null,inimigo.getNome() + 
+					"\n Vida - "  + inimigo.getVida() +
+					"\n Mana - " + inimigo.getMana());
+			
+			
 
 		}
 	}
