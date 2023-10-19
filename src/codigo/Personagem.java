@@ -8,7 +8,7 @@ public abstract class Personagem {
 	private Double mana;
 	private Double manaMax;
 	private Double velocidade;
-	private Double velociadeMax;
+	private Double velocidadeMax;
 	
 	public String getNome() {
 		return nome;
@@ -52,10 +52,10 @@ public abstract class Personagem {
 	public void setVelocidade(Double velocidade) {
 		this.velocidade = velocidade;
 	}
-	public Double getVelociadeMax() {
-		return velociadeMax;
+	public Double getVelocidadeMax() {
+		return velocidadeMax;
 	}
-	public void setVelociadeMax(Double velociadeMax) {
-		this.velociadeMax = velociadeMax;
+	public void setVelocidadeMax(Double velocidadeMax) {
+		this.velocidadeMax = velocidadeMax;
 	}
 }

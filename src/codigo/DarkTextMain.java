@@ -16,11 +16,9 @@ public class DarkTextMain {
 		Inimigo inimigo = new Inimigo();
 
 		while (op != 0) {// ----------------------------------------------------------------
-			op = Integer.valueOf(JOptionPane.showInputDialog(null,
-					"Bem vindo deseja começar sua Aventura? \n 0-Não \n qualquer outro número para sim")); // Conirmar
-																											// dialogo!!!!!!!!!!1!!1
+			op = Integer.valueOf(JOptionPane.showConfirmDialog(null, "Bem vindo deseja começar sua Aventura?"));
 
-			if (op == 0) {
+			if (op == 1 || op == 2) {
 				break;
 			}
 			jogador.setNome(JOptionPane.showInputDialog(null, "Qual seu nome"));
@@ -33,8 +31,6 @@ public class DarkTextMain {
 				atributos(jogador, inimigo, "i");
 				combate(jogador, inimigo, vitoria, op);
 			}
-			// System.out.println(jogador.getNome()); //testar troca de nome
-
 		} // ----------------------------------------------------------------------------------
 
 		leitura.close();
@@ -43,9 +39,8 @@ public class DarkTextMain {
 	public static void criativo(Jogador jogador) {
 
 		Integer op = Integer.MAX_VALUE;
-		op = Integer.valueOf(JOptionPane.showInputDialog(null,
-				"Deseja utilizar o modo criativo \n 1-sim \n qualquer outro número pra não "));
-		if (op == 1) {
+		op = Integer.valueOf(JOptionPane.showConfirmDialog(null, "Deseja utilizar o modo criativo"));
+		if (op == 0) {
 			op = Integer.valueOf(JOptionPane.showInputDialog(null,
 					"O que deseja fazer? \n 0-sair \n 1-alterar nome \n 2-listar os atributos dos inimigos \n 3-adicionar inimigo \n 4-remover área"));
 
@@ -85,7 +80,7 @@ public class DarkTextMain {
 			jogador.setForce(25.0);
 			jogador.setManaMax(35.0);
 			jogador.setMana(35.0);
-			jogador.setVelociadeMax(75.0);
+			jogador.setVelocidadeMax(75.0);
 			jogador.setVelocidade(75.0);
 			break;
 		case 2:
@@ -95,7 +90,7 @@ public class DarkTextMain {
 			jogador.setForce(12.0);
 			jogador.setManaMax(120.0);
 			jogador.setMana(120.0);
-			jogador.setVelociadeMax(40.0);
+			jogador.setVelocidadeMax(40.0);
 			jogador.setVelocidade(40.0);
 			break;
 		case 3:
@@ -105,7 +100,7 @@ public class DarkTextMain {
 			jogador.setForce(15.0);
 			jogador.setManaMax(100.0);
 			jogador.setMana(100.0);
-			jogador.setVelociadeMax(40.0);
+			jogador.setVelocidadeMax(40.0);
 			jogador.setVelocidade(40.0);
 			break;
 		}
@@ -116,13 +111,13 @@ public class DarkTextMain {
 			JOptionPane.showMessageDialog(null,
 					"Classe - " + jogador.getClasse() + "\n Vida - " + jogador.getVidaMax() + "\n Mana - "
 							+ jogador.getManaMax() + "\n Força - " + jogador.getForce() + "\n Velocidade - "
-							+ jogador.getVelociadeMax());
+							+ jogador.getVelocidadeMax());
 		} else if (op == "i") {
 
 			JOptionPane.showMessageDialog(null,
 					"Nome - " + inimigo.getNome() + "\n Vida - " + inimigo.getVidaMax() + "\n Mana - "
 							+ inimigo.getManaMax() + "\n Força - " + inimigo.getForce() + "\n Velocidade - "
-							+ inimigo.getVelociadeMax());
+							+ inimigo.getVelocidadeMax());
 		}
 	}
 
@@ -136,7 +131,8 @@ public class DarkTextMain {
 		case 1:
 			florestaInimigo(inimigo);
 
-			JOptionPane.showMessageDialog(null,"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+			JOptionPane.showMessageDialog(null,
+					"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
 			break;
 		}
 	}
@@ -146,50 +142,38 @@ public class DarkTextMain {
 		Integer op = random.nextInt(0, 101);
 
 		if (op < 50) {
-			inimigo.setNome("goblin");
+			inimigo.setNome("Goblin");
 			inimigo.setVidaMax(80.0);
 			inimigo.setVida(80.0);
 			inimigo.setForce(15.0);
 			inimigo.setManaMax(0.0);
 			inimigo.setMana(0.0);
-			inimigo.setVelociadeMax(45.0);
+			inimigo.setVelocidadeMax(45.0);
 			inimigo.setVelocidade(45.0);
 		} else if (op >= 50) {
-			inimigo.setNome("lobo selvagem");
+			inimigo.setNome("Lobo selvagem");
 			inimigo.setVidaMax(80.0);
 			inimigo.setVida(80.0);
 			inimigo.setForce(12.0);
 			inimigo.setManaMax(0.0);
 			inimigo.setMana(0.0);
-			inimigo.setVelociadeMax(70.0);
+			inimigo.setVelocidadeMax(70.0);
 			inimigo.setVelocidade(70.0);
 		}
-	}
-
-	public static Integer velocidade(Jogador jogador, Inimigo inimigo) {
-		if (jogador.getVelocidade() > inimigo.getVelocidade()) {
-			jogador.setVelocidade(jogador.getVelocidade() - inimigo.getVelociadeMax());
-			inimigo.setVelocidade(inimigo.getVelociadeMax());
-			return 1;
-
-		} else{
-			inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelociadeMax());
-			jogador.setVelocidade(jogador.getVelociadeMax());
-			return 2;
-		}
-
 	}
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria, int op) {
 		jogador.setFugir(0);
 		while (vitoria == 2) {
-			velocidade(jogador, inimigo);
-			if (velocidade(jogador, inimigo) == 1) {
-				//JOptionPane.showMessageDialog(null, "entrou");
-				menuAction(jogador, inimigo, op);
+			if (jogador.getVelocidade() >= inimigo.getVelocidade()) {
+				jogador.setVelocidade(jogador.getVelocidade() - inimigo.getVelocidadeMax());
+				inimigo.setVelocidade(inimigo.getVelocidadeMax());
+				menuAction(jogador, inimigo, op, vitoria);
 
-			} else if (velocidade(jogador, inimigo) == 2) {
-				JOptionPane.showMessageDialog(null, inimigo.getNome()+" te atacou");
+			} else if (inimigo.getVelocidade() > jogador.getVelocidade()) {
+				inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelocidadeMax());
+				jogador.setVelocidade(jogador.getVelocidadeMax());
+				JOptionPane.showMessageDialog(null, inimigo.getNome() + " te atacou");
 				inimigo.ataque(inimigo, jogador);
 			}
 			if (jogador.getFugir() == 1) {
@@ -198,16 +182,19 @@ public class DarkTextMain {
 		}
 	}
 
-	public static void menuAction(Jogador jogador, Inimigo inimigo, int op) {
+	public static void menuAction(Jogador jogador, Inimigo inimigo, int op, int vitoria) {
 
 		JOptionPane.showMessageDialog(null, "\n Sua vez");
 		op = Integer.valueOf(JOptionPane.showInputDialog(jogador.getNome() + "\n Vida: " + jogador.getVida()
-				+ "\n Mana: " + jogador.getMana() +"\n"+jogador.getVelocidade()+ "\n" + inimigo.getNome() + "\n Vida: " + inimigo.getVida()
-				+ "\n Mana: " + inimigo.getMana()+"\n"+inimigo.getVelocidade() + "\n 1-Habilidade" + "\n 2-Fugir"));
+				+ "\n Mana: " + jogador.getMana() + "\n" + inimigo.getNome() + "\n Vida: " + inimigo.getVida()
+				+ "\n Mana: " + inimigo.getMana() + "\n" + "\n 1-Habilidade" + "\n 2-Fugir"));
 		if (op == 1) {
 			jogador.corteEspada(inimigo, jogador);
 		} else if (op == 2) {
 			jogador.setFugir(1);
+			jogador.setVida(jogador.getVidaMax());
+			jogador.setMana(jogador.getManaMax());
+			jogador.setVelocidade(jogador.getVelocidadeMax());
 		}
 	}
 }
