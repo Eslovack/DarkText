@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 public class DarkTextMain {
 
@@ -132,7 +133,7 @@ public class DarkTextMain {
 	}
 
 	public static void escolherArea(Inimigo inimigo) {
-
+		ImageIcon iconic = new ImageIcon("Floresta.png");
 		Integer op = Integer.MAX_VALUE;
 		while (op != 1 && op!= 2) {
 			op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta \n 2-Pantano"));
@@ -140,9 +141,8 @@ public class DarkTextMain {
 			switch (op) {
 			case 1:
 				florestaInimigo(inimigo);
-
 				JOptionPane.showMessageDialog(null,
-						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome(),null, JOptionPane.INFORMATION_MESSAGE, iconic);
 				break;
 			case 2:
 				pantanoInimigo(inimigo);
@@ -301,7 +301,7 @@ public class DarkTextMain {
 				op = Integer.valueOf(JOptionPane.showInputDialog(null, "1- corte de adaga"));
 				if (op == 1) {
 					jogador.corteAdaga(inimigo, jogador);
-					JOptionPane.showMessageDialog(null, "Você atacou o " + inimigo.getNome());
+					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
 				} else {
 					JOptionPane.showInternalMessageDialog(null, "Opção errada");
 				}
@@ -311,7 +311,7 @@ public class DarkTextMain {
 				op = Integer.valueOf(JOptionPane.showInputDialog(null, "1- corte de adaga"));
 				if (op == 1) {
 					jogador.corteAdaga(inimigo, jogador);
-					JOptionPane.showMessageDialog(null, "Você atacou o " + inimigo.getNome());
+					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
 				} else {
 					JOptionPane.showInternalMessageDialog(null, "Opção errada");
 				}
