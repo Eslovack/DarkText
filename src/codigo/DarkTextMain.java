@@ -164,17 +164,29 @@ public class DarkTextMain {
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria, int op) {
 		jogador.setFugir(0);
+		vitoria = 2;
 		while (vitoria == 2) {
 			if (jogador.getVelocidade() >= inimigo.getVelocidade()) {
 				jogador.setVelocidade(jogador.getVelocidade() - inimigo.getVelocidadeMax());
 				inimigo.setVelocidade(inimigo.getVelocidadeMax());
 				menuAction(jogador, inimigo, op, vitoria);
-
+				if (jogador.getVida() <=0 ) {
+					vitoria = 1;
+				}else if (inimigo.getVida() <= 0 ) {
+					vitoria = 0;
+				}
 			} else if (inimigo.getVelocidade() > jogador.getVelocidade()) {
 				inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelocidadeMax());
 				jogador.setVelocidade(jogador.getVelocidadeMax());
 				JOptionPane.showMessageDialog(null, inimigo.getNome() + " te atacou");
 				inimigo.ataque(inimigo, jogador);
+				if (jogador.getVida() <=0 ) {
+					vitoria = 1;
+					JOptionPane.showMessageDialog(null,"você ganhou");
+				}else if (inimigo.getVida() <= 0 ) {
+					vitoria = 0;
+					JOptionPane.showMessageDialog(null,"você morreu");
+				}
 			}
 			if (jogador.getFugir() == 1) {
 				break;
@@ -197,4 +209,5 @@ public class DarkTextMain {
 			jogador.setVelocidade(jogador.getVelocidadeMax());
 		}
 	}
+
 }
