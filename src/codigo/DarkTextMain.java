@@ -39,6 +39,7 @@ public class DarkTextMain {
 	public static void criativo(Jogador jogador) {
 
 		Integer op = Integer.MAX_VALUE;
+		while (op != 0 && op != 1 && op != 2 && op != 3 && op != 4) {
 		op = Integer.valueOf(JOptionPane.showConfirmDialog(null, "Deseja utilizar o modo criativo"));
 		if (op == 0) {
 			op = Integer.valueOf(JOptionPane.showInputDialog(null,
@@ -63,14 +64,18 @@ public class DarkTextMain {
 			case 4: {
 				break;
 			}
+			default:
+				JOptionPane.showInternalMessageDialog(null,"Opção errada");
+				break;
 			}
 		}
+	  }
 	}
 
 	public static void classe(Jogador jogador) {
 
 		Integer op = Integer.MAX_VALUE;
-
+		while (op !=1 && op !=2 && op!=3) {
 		op = Integer.valueOf(JOptionPane.showInputDialog("Escolha sua classe \n 1-Cavaleiro \n 2-Mago \n 3-Clérico"));
 		switch (op) {
 		case 1:
@@ -103,7 +108,11 @@ public class DarkTextMain {
 			jogador.setVelocidadeMax(40.0);
 			jogador.setVelocidade(40.0);
 			break;
+		default:
+			JOptionPane.showInternalMessageDialog(null,"Opção errada");
+			break;
 		}
+	  }
 	}
 
 	public static void atributos(Jogador jogador, Inimigo inimigo, String op) {
@@ -124,7 +133,7 @@ public class DarkTextMain {
 	public static void escolherArea(Inimigo inimigo) {
 
 		Integer op = Integer.MAX_VALUE;
-
+		while (op != 1) {
 		op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta"));
 
 		switch (op) {
@@ -134,7 +143,11 @@ public class DarkTextMain {
 			JOptionPane.showMessageDialog(null,
 					"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
 			break;
+		default:
+			JOptionPane.showInternalMessageDialog(null,"Opção errada");
+			break;
 		}
+	  }
 	}
 
 	public static void florestaInimigo(Inimigo inimigo) {
@@ -172,8 +185,12 @@ public class DarkTextMain {
 				menuAction(jogador, inimigo, op, vitoria);
 				if (jogador.getVida() <=0 ) {
 					vitoria = 1;
+					JOptionPane.showMessageDialog(null,"você morreu");
+					break;
 				}else if (inimigo.getVida() <= 0 ) {
 					vitoria = 0;
+					JOptionPane.showMessageDialog(null,"você ganhou");
+					break;
 				}
 			} else if (inimigo.getVelocidade() > jogador.getVelocidade()) {
 				inimigo.setVelocidade(inimigo.getVelocidade() - jogador.getVelocidadeMax());
@@ -182,10 +199,12 @@ public class DarkTextMain {
 				inimigo.ataque(inimigo, jogador);
 				if (jogador.getVida() <=0 ) {
 					vitoria = 1;
-					JOptionPane.showMessageDialog(null,"você ganhou");
+					JOptionPane.showMessageDialog(null,"você morreu");
+					break;
 				}else if (inimigo.getVida() <= 0 ) {
 					vitoria = 0;
-					JOptionPane.showMessageDialog(null,"você morreu");
+					JOptionPane.showMessageDialog(null,"você ganhou");
+					break;
 				}
 			}
 			if (jogador.getFugir() == 1) {
@@ -195,7 +214,8 @@ public class DarkTextMain {
 	}
 
 	public static void menuAction(Jogador jogador, Inimigo inimigo, int op, int vitoria) {
-
+		
+		while (op !=1 && op != 2) {
 		JOptionPane.showMessageDialog(null, "\n Sua vez");
 		op = Integer.valueOf(JOptionPane.showInputDialog(jogador.getNome() + "\n Vida: " + jogador.getVida()
 				+ "\n Mana: " + jogador.getMana() + "\n" + inimigo.getNome() + "\n Vida: " + inimigo.getVida()
@@ -208,6 +228,9 @@ public class DarkTextMain {
 			jogador.setMana(jogador.getManaMax());
 			jogador.setVelocidade(jogador.getVelocidadeMax());
 		}
+		else {
+			JOptionPane.showInternalMessageDialog(null,"Opção errada");
+		}
+	 }
 	}
-
 }
