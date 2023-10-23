@@ -133,7 +133,8 @@ public class DarkTextMain {
 	}
 
 	public static void escolherArea(Inimigo inimigo) {
-		ImageIcon iconic = new ImageIcon("Floresta.png");
+		ImageIcon iconic = new ImageIcon("Floresta.jpeg");
+		ImageIcon iconici = new ImageIcon("Pantano.jpeg");
 		Integer op = Integer.MAX_VALUE;
 		while (op != 1 && op!= 2) {
 			op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta \n 2-Pantano"));
@@ -142,12 +143,14 @@ public class DarkTextMain {
 			case 1:
 				florestaInimigo(inimigo);
 				JOptionPane.showMessageDialog(null,
-						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome(),null, JOptionPane.INFORMATION_MESSAGE, iconic);
+						"",null,JOptionPane.INFORMATION_MESSAGE, iconic);
+				JOptionPane.showMessageDialog(null,
+						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
 				break;
 			case 2:
 				pantanoInimigo(inimigo);
 				
-				JOptionPane.showInternalMessageDialog(null, "\"Enquanto se aventurava pelo pantano tupiniquim, você encontrou um " + inimigo.getNome());
+				JOptionPane.showInternalMessageDialog(null, "",null,JOptionPane.INFORMATION_MESSAGE, iconici);
 				break;
 				
 			default:
@@ -229,6 +232,8 @@ public class DarkTextMain {
 	}
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria, int op) {
+		ImageIcon iconic = new ImageIcon("morte.jpeg");
+		ImageIcon iconic1 = new ImageIcon("vitoria.jpeg");
 		jogador.setFugir(0);
 		vitoria = 2;
 		while (vitoria == 2) {
@@ -238,11 +243,12 @@ public class DarkTextMain {
 				menuAction(jogador, inimigo, op, vitoria);
 				if (jogador.getVida() <= 0) {
 					vitoria = 1;
-					JOptionPane.showMessageDialog(null, "você morreu");
+					JOptionPane.showMessageDialog(null,
+							"",null, JOptionPane.INFORMATION_MESSAGE, iconic);
 					break;
 				} else if (inimigo.getVida() <= 0) {
 					vitoria = 0;
-					JOptionPane.showMessageDialog(null, "você ganhou");
+					JOptionPane.showMessageDialog(null, "",null,JOptionPane.INFORMATION_MESSAGE, iconic1);
 					break;
 				}
 			} else if (inimigo.getVelocidade() > jogador.getVelocidade()) {
@@ -252,11 +258,12 @@ public class DarkTextMain {
 				inimigo.ataque(inimigo, jogador);
 				if (jogador.getVida() <= 0) {
 					vitoria = 1;
-					JOptionPane.showMessageDialog(null, "você morreu");
+					JOptionPane.showMessageDialog(null,
+							"",null, JOptionPane.INFORMATION_MESSAGE, iconic);
 					break;
 				} else if (inimigo.getVida() <= 0) {
 					vitoria = 0;
-					JOptionPane.showMessageDialog(null, "você ganhou");
+					JOptionPane.showMessageDialog(null, "",null,JOptionPane.INFORMATION_MESSAGE, iconic1);
 					break;
 				}
 			}
