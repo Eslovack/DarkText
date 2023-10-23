@@ -36,7 +36,7 @@ public class DarkTextMain {
 			while (vitoria != 1) {
 				escolherArea(inimigo);
 				atributos(jogador, inimigo, "i");
-				jogador.setFugir(0);
+				restaurar(jogador, inimigo, vitoria);
 				combate(jogador, inimigo, vitoria);
 			}
 		} // ----------------------------------------------------------------------------------
@@ -122,8 +122,8 @@ public class DarkTextMain {
 				jogador.setForce(12.0);
 				jogador.setManaMax(120.0);
 				jogador.setMana(120.0);
-				jogador.setVelocidadeMax(40.0);
-				jogador.setVelocidade(40.0);
+				jogador.setVelocidadeMax(50.0);
+				jogador.setVelocidade(50.0);
 				break;
 			case 3:
 				jogador.setClasse("Clérico");
@@ -132,8 +132,8 @@ public class DarkTextMain {
 				jogador.setForce(15.0);
 				jogador.setManaMax(100.0);
 				jogador.setMana(100.0);
-				jogador.setVelocidadeMax(40.0);
-				jogador.setVelocidade(40.0);
+				jogador.setVelocidadeMax(50.0);
+				jogador.setVelocidade(50.0);
 				break;
 			default:
 				JOptionPane.showInternalMessageDialog(null, "Opção errada");
@@ -256,8 +256,8 @@ public class DarkTextMain {
 	}
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria) {
-		ImageIcon iconic = new ImageIcon("morte.jpeg");
-		ImageIcon iconic1 = new ImageIcon("vitoria.jpeg");
+		ImageIcon mortepng = new ImageIcon("morte.jpeg");
+		ImageIcon vitoriapng = new ImageIcon("vitoria.jpeg");
 
 		vitoria = 2;
 
@@ -269,11 +269,11 @@ public class DarkTextMain {
 
 				if (jogador.getVida() <= 0) {
 					vitoria = 1;
-					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
+					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, mortepng);
 					break;
 				} else if (inimigo.getVida() <= 0) {
 					vitoria = 0;
-					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic1);
+					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, vitoriapng);
 					break;
 				}
 
@@ -284,11 +284,11 @@ public class DarkTextMain {
 				inimigo.ataque(inimigo, jogador);
 				if (jogador.getVida() <= 0) {
 					vitoria = 1;
-					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
+					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, mortepng);
 					break;
 				} else if (inimigo.getVida() <= 0) {
 					vitoria = 0;
-					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic1);
+					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, vitoriapng);
 					break;
 				}
 
@@ -314,10 +314,9 @@ public class DarkTextMain {
 				menuHabili(jogador, inimigo, vitoria);
 				break;
 			} else if (jogador.getOp() == 2) {
+				JOptionPane.showMessageDialog(null, "Você Fugiu");
+				restaurar(jogador, inimigo, vitoria);
 				jogador.setFugir(1);
-				jogador.setVida(jogador.getVidaMax());
-				jogador.setMana(jogador.getManaMax());
-				jogador.setVelocidade(jogador.getVelocidadeMax());
 				break;
 			} else {
 				JOptionPane.showInternalMessageDialog(null, "Opção errada");
@@ -329,7 +328,7 @@ public class DarkTextMain {
 		while (jogador.getOp() != 1 && jogador.getOp() != 2) {
 			if (jogador.getClasse().equals("Cavaleiro")) {
 				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null,
-						jogador.getCooldown2() + "\n1- Corte de espada \n 2- Ataque forte")));
+						jogador.getCooldown2() + "\n1- Corte de espada \n 2- Ataque forte("+jogador.getCooldown2()+")")));
 				if (jogador.getOp() == 1) {
 					corteEspada(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -342,7 +341,7 @@ public class DarkTextMain {
 
 			} else if (jogador.getClasse().equals("Mago")) {
 				jogador.setOp(
-						Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Bola de fogo")));
+						Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Bola de fogo("+jogador.getCooldown2()+")")));
 				if (jogador.getOp() == 1) {
 					corteAdaga(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -357,7 +356,7 @@ public class DarkTextMain {
 
 			}
 			if (jogador.getClasse().equals("Clérico")) {
-				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Cura")));
+				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Cura("+jogador.getCooldown2()+")")));
 				if (jogador.getOp() == 1) {
 					corteAdaga(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -371,6 +370,15 @@ public class DarkTextMain {
 				}
 			}
 		}
+	}
+	
+	public static void restaurar(Jogador jogador, Inimigo inimigo, int vitoria) {
+		jogador.setFugir(0);
+		jogador.setVida(jogador.getVidaMax());
+		jogador.setMana(jogador.getManaMax());
+		jogador.setVelocidade(jogador.getVelocidadeMax());
+		vitoria = 2;
+		jogador.setCooldown2(0);
 	}
 
 	public static void corteEspada(Jogador jogador, Inimigo inimigo, int vitoria) {
@@ -401,7 +409,7 @@ public class DarkTextMain {
 			if (jogador.getMana() >= 20) {
 				inimigo.setVida(inimigo.getVida() - 50);
 				jogador.setMana(jogador.getMana() - 20);
-				jogador.setCooldown2(5);
+				jogador.setCooldown2(4);
 			}else {
 				JOptionPane.showMessageDialog(null, "você não tem mana para executar a habilidade");
 				menuAction(jogador, inimigo, vitoria);
@@ -416,9 +424,9 @@ public class DarkTextMain {
 		if (jogador.getCooldown2() == 0) {
 			if (jogador.getMana() >= 20) {
 				if (jogador.getVida() <= jogador.getVidaMax()) {
-					jogador.setVida(jogador.getVida() + 40);
+					jogador.setVida(jogador.getVida() + 50);
 					jogador.setMana(jogador.getMana() - 20);
-					jogador.setCooldown2(5);
+					jogador.setCooldown2(4);
 					if (jogador.getVida() >= jogador.getVidaMax()) {
 						jogador.setVida(jogador.getVidaMax());
 					}
