@@ -1,8 +1,26 @@
 package codigo;
 
-public class Jogador extends Personagem{
+public class Jogador extends Personagem {
 	private String classe;
 	private Integer fugir;
+	private Integer cooldown2;
+	private Integer op;   
+
+	public Integer getOp() {
+		return op;
+	}
+
+	public void setOp(Integer op) {
+		this.op = op;
+	}
+
+	public Integer getCooldown2() {
+		return cooldown2;
+	}
+
+	public void setCooldown2(Integer cooldown2) {
+		this.cooldown2 = cooldown2;
+	}
 
 	public Integer getFugir() {
 		return fugir;
@@ -18,14 +36,5 @@ public class Jogador extends Personagem{
 
 	public void setClasse(String classe) {
 		this.classe = classe;
-	}
-	public void corteAdaga(Inimigo inimigo, Jogador jogador) {
-		inimigo.setVida(inimigo.getVida() - jogador.getForce());
-	}
-	public void corteEspada(Inimigo inimigo, Jogador jogador) {
-		inimigo.setVida(inimigo.getVida() - jogador.getForce());
-	}
-	public void ataqueForte(Inimigo inimigo, Jogador jogador) {
-		inimigo.setVida(inimigo.getVida() - jogador.getForce());
 	}
 }
