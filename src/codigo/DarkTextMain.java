@@ -11,15 +11,17 @@ public class DarkTextMain {
 	public static void main(String[] args) {
 
 		int vitoria = 2;
-		boolean floresta = true;
-		boolean pantano = true;
-		boolean nova_area = false;
-		String nova_area_nome = null;
 		Scanner leitura = new Scanner(System.in);
 		Jogador jogador = new Jogador();
 		Inimigo inimigo = new Inimigo();
+		Inimigo inimigo2 = new Inimigo();
 		jogador.setCooldown2(0);
 		jogador.setOp(Integer.MAX_VALUE);
+		Area area = new Area();
+		area.setFloresta("");
+		area.setPantano("");
+		area.setNova_area("removido");
+		area.setNova_area_nome("");
 
 		while (jogador.getOp() != 0) {// ----------------------------------------------------------------
 			jogador.setOp(
@@ -30,11 +32,11 @@ public class DarkTextMain {
 			}
 			jogador.setNome(JOptionPane.showInputDialog(null, "Qual seu nome"));
 
-			criativo(jogador, inimigo, floresta, pantano, nova_area, nova_area_nome);
+			criativo(jogador, inimigo, inimigo2, area);
 			classe(jogador);
 			atributos(jogador, inimigo, "j");
 			while (vitoria != 1) {
-				escolherArea(inimigo);
+				escolherArea(inimigo, inimigo2, area);
 				atributos(jogador, inimigo, "i");
 				restaurar(jogador, inimigo, vitoria);
 				combate(jogador, inimigo, vitoria);
@@ -44,7 +46,7 @@ public class DarkTextMain {
 		leitura.close();
 	}
 
-	public static void criativo(Jogador jogador, Inimigo inimigo, boolean floresta, boolean pantano, boolean nova_area, String nova_area_nome  ) {
+	public static void criativo(Jogador jogador, Inimigo inimigo, Inimigo inimigo2, Area area) {
 
 		Integer op = Integer.MAX_VALUE;
 		while (op != 0 && op != 1 && op != 2 && op != 3 && op != 4) {
@@ -59,35 +61,55 @@ public class DarkTextMain {
 				}
 				case 1: {
 					jogador.setNome(JOptionPane.showInputDialog("Qual seu novo nome"));
-					JOptionPane.showMessageDialog(null, "seu novo nome é "+jogador.getNome());
+					JOptionPane.showMessageDialog(null, "seu novo nome é " + jogador.getNome());
 					break;
 				}
 				case 2: {
-					JOptionPane.showMessageDialog(null,"Nome - Capivara \n Vida - 80\n Mana - 0 \n Força - 12 \n Velocidade - 35");
-					JOptionPane.showMessageDialog(null,"Nome - Lobo Guará \n Vida - 90\n Mana - 0 \n Força - 15 \n Velocidade - 70");
-					JOptionPane.showMessageDialog(null,"Nome - Onça Pintada \n Vida - 100\n Mana - 0 \n Força - 20 \n Velocidade - 20");
-					
-					JOptionPane.showMessageDialog(null,"Nome - Sucuri \n Vida - 100\n Mana - 0 \n Força - 25 \n Velocidade - 45");
-					JOptionPane.showMessageDialog(null,"Nome - Crocodilo \n Vida - 150\n Mana - 0 \n Força - 20 \n Velocidade - 50");
-					JOptionPane.showMessageDialog(null,"Nome - Jacaré do papo amarelo \n Vida - 180\n Mana - 0 \n Força - 30 \n Velocidade - 50");
+					JOptionPane.showMessageDialog(null,
+							"Nome - Capivara \n Vida - 80\n Mana - 0 \n Força - 12 \n Velocidade - 35");
+					JOptionPane.showMessageDialog(null,
+							"Nome - Lobo Guará \n Vida - 90\n Mana - 0 \n Força - 15 \n Velocidade - 70");
+					JOptionPane.showMessageDialog(null,
+							"Nome - Onça Pintada \n Vida - 100\n Mana - 0 \n Força - 20 \n Velocidade - 20");
+
+					JOptionPane.showMessageDialog(null,
+							"Nome - Sucuri \n Vida - 100\n Mana - 0 \n Força - 25 \n Velocidade - 45");
+					JOptionPane.showMessageDialog(null,
+							"Nome - Crocodilo \n Vida - 150\n Mana - 0 \n Força - 20 \n Velocidade - 50");
+					JOptionPane.showMessageDialog(null,
+							"Nome - Jacaré do papo amarelo \n Vida - 180\n Mana - 0 \n Força - 30 \n Velocidade - 50");
 					break;
 
 				}
 				case 3: {
-					//Incompleto
-					nova_area_nome = JOptionPane.showInputDialog(null, "Qual o nome da nova área?");
-					nova_area = true;
-					inimigo.setNome(JOptionPane.showInputDialog(null, "Qual o nome do novo inimigo?"));
-					inimigo.setVida(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a vida do novo inimigo?")));
-					inimigo.setVidaMax(inimigo.getVida());
-					inimigo.setForce(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a força do novo inimigo?")));
-					inimigo.setMana(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a mana do novo inimigo?")));
-					inimigo.setManaMax(inimigo.getMana());
-					inimigo.setVelocidade(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a velocidade do novo inimigo?")));
-					inimigo.setVelocidadeMax(inimigo.getVelocidade());
+					area.setNova_area_nome(JOptionPane.showInputDialog(null, "Qual o nome da nova área?"));
+					area.setNova_area("");
+					inimigo2.setNome(JOptionPane.showInputDialog(null, "Qual o nome do novo inimigo?"));
+					inimigo2.setVida(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a vida do novo inimigo?")));
+					inimigo2.setVidaMax(inimigo2.getVida());
+					inimigo2.setForce(
+							Double.valueOf(JOptionPane.showInputDialog(null, "Qual a força do novo inimigo?")));
+					inimigo2.setMana(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a mana do novo inimigo?")));
+					inimigo2.setManaMax(inimigo2.getMana());
+					inimigo2.setVelocidade(
+							Double.valueOf(JOptionPane.showInputDialog(null, "Qual a velocidade do novo inimigo?")));
+					inimigo2.setVelocidadeMax(inimigo2.getVelocidade());
+					area.setNova_area("");
 					break;
 				}
 				case 4: {
+					op = 0;
+					while (op != 1 && op != 2) {
+						op = Integer.valueOf(JOptionPane.showInputDialog(null,
+								"Qual área você deseja remover? \n 1-Floresta \n 2-Pantano"));
+						if (op == 1) {
+							area.setFloresta("removido");
+						} else if (op == 2) {
+							area.setPantano("removido");
+						} else {
+							JOptionPane.showInternalMessageDialog(null, "Opção errada");
+						}
+					}
 					break;
 				}
 				default:
@@ -157,31 +179,84 @@ public class DarkTextMain {
 		}
 	}
 
-	public static void escolherArea(Inimigo inimigo ) {
+	public static void escolherArea(Inimigo inimigo, Inimigo inimigo2, Area area) {
 		ImageIcon iconic = new ImageIcon("Floresta.jpeg");
 		ImageIcon iconici = new ImageIcon("Pantano.jpeg");
 		Integer op = Integer.MAX_VALUE;
-		while (op != 1 && op != 2) {
-			op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta \n 2-Pantano"));
 
-			switch (op) {
-			case 1:
-				florestaInimigo(inimigo);
-				JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
-				JOptionPane.showMessageDialog(null,
-						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
-				break;
-			case 2:
-				pantanoInimigo(inimigo);
+		if (area.getNova_area().equals("removido")) {
+			while (op != 1 && op != 2) {
+				op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta "
+						+ area.getFloresta() + " \n 2-Pantano " + area.getPantano()));
 
-				JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
-				break;
+				switch (op) {
+				case 1:
+					if (area.getFloresta() != "removido") {
+						florestaInimigo(inimigo);
+						JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
+						JOptionPane.showMessageDialog(null,
+								"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+					} else {
+						JOptionPane.showInternalMessageDialog(null, "Opção errada");
+						escolherArea(inimigo, inimigo2, area);
+					}
 
-			default:
-				JOptionPane.showInternalMessageDialog(null, "Opção errada");
-				break;
+					break;
+				case 2:
+					if (area.getPantano() != "removido") {
+						pantanoInimigo(inimigo);
+						JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
+					} else {
+						JOptionPane.showInternalMessageDialog(null, "Opção errada");
+						escolherArea(inimigo, inimigo2, area);
+					}
+					break;
+
+				default:
+					JOptionPane.showInternalMessageDialog(null, "Opção errada");
+					break;
+				}
+			}
+		} else {
+			while (op != 1 && op != 2 && op != 3) {
+				op = Integer.valueOf(
+						JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta " + area.getFloresta()
+								+ " \n 2-Pantano " + area.getPantano() + " \n 3-" + area.getNova_area_nome()));
+
+				switch (op) {
+				case 1:
+					florestaInimigo(inimigo);
+					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
+					JOptionPane.showMessageDialog(null,
+							"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+					break;
+				case 2:
+					pantanoInimigo(inimigo);
+
+					JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
+					break;
+				case 3:
+					novaArea(inimigo, inimigo2);
+					break;
+
+				default:
+					JOptionPane.showInternalMessageDialog(null, "Opção errada");
+					break;
+				}
 			}
 		}
+
+	}
+
+	public static void novaArea(Inimigo inimigo, Inimigo inimigo2) {
+		inimigo.setNome(inimigo2.getNome());
+		inimigo.setVidaMax(inimigo2.getVidaMax());
+		inimigo.setVida(inimigo2.getVida());
+		inimigo.setForce(inimigo2.getForce());
+		inimigo.setManaMax(inimigo2.getManaMax());
+		inimigo.setMana(inimigo2.getMana());
+		inimigo.setVelocidadeMax(inimigo2.getVelocidadeMax());
+		inimigo.setVelocidade(inimigo2.getVelocidade());
 	}
 
 	public static void pantanoInimigo(Inimigo inimigo) {
@@ -261,7 +336,7 @@ public class DarkTextMain {
 
 		vitoria = 2;
 
-		while (vitoria == 2 && jogador.getFugir()!= 1) {
+		while (vitoria == 2 && jogador.getFugir() != 1) {
 			if (jogador.getVelocidade() >= inimigo.getVelocidade()) {
 				jogador.setVelocidade(jogador.getVelocidade() - inimigo.getVelocidadeMax());
 				inimigo.setVelocidade(inimigo.getVelocidadeMax());
@@ -328,7 +403,7 @@ public class DarkTextMain {
 		while (jogador.getOp() != 1 && jogador.getOp() != 2) {
 			if (jogador.getClasse().equals("Cavaleiro")) {
 				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null,
-						jogador.getCooldown2() + "\n1- Corte de espada \n 2- Ataque forte("+jogador.getCooldown2()+")")));
+						"\n1- Corte de espada \n 2- Ataque forte(" + jogador.getCooldown2() + ")")));
 				if (jogador.getOp() == 1) {
 					corteEspada(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -340,8 +415,8 @@ public class DarkTextMain {
 				}
 
 			} else if (jogador.getClasse().equals("Mago")) {
-				jogador.setOp(
-						Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Bola de fogo("+jogador.getCooldown2()+")")));
+				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null,
+						"1- Corte de adaga \n 2- Bola de fogo(" + jogador.getCooldown2() + ")")));
 				if (jogador.getOp() == 1) {
 					corteAdaga(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -356,7 +431,8 @@ public class DarkTextMain {
 
 			}
 			if (jogador.getClasse().equals("Clérico")) {
-				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null, "1- Corte de adaga \n 2- Cura("+jogador.getCooldown2()+")")));
+				jogador.setOp(Integer.valueOf(JOptionPane.showInputDialog(null,
+						"1- Corte de adaga \n 2- Cura(" + jogador.getCooldown2() + ")")));
 				if (jogador.getOp() == 1) {
 					corteAdaga(jogador, inimigo, vitoria);
 					JOptionPane.showMessageDialog(null, "Você atacou o(a) " + inimigo.getNome());
@@ -371,7 +447,7 @@ public class DarkTextMain {
 			}
 		}
 	}
-	
+
 	public static void restaurar(Jogador jogador, Inimigo inimigo, int vitoria) {
 		jogador.setFugir(0);
 		jogador.setVida(jogador.getVidaMax());
@@ -410,7 +486,7 @@ public class DarkTextMain {
 				inimigo.setVida(inimigo.getVida() - 50);
 				jogador.setMana(jogador.getMana() - 20);
 				jogador.setCooldown2(4);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "você não tem mana para executar a habilidade");
 				menuAction(jogador, inimigo, vitoria);
 			}
@@ -430,11 +506,11 @@ public class DarkTextMain {
 					if (jogador.getVida() >= jogador.getVidaMax()) {
 						jogador.setVida(jogador.getVidaMax());
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "sua vida já está no máximo");
-					menuAction(jogador, inimigo, vitoria);	
+					menuAction(jogador, inimigo, vitoria);
 				}
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "você não tem mana para executar a habilidade");
 				menuAction(jogador, inimigo, vitoria);
 			}
