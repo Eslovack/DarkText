@@ -1,4 +1,4 @@
-package codigo;
+package modelo;
 
 public class Jogador extends Personagem {
 	private String classe;

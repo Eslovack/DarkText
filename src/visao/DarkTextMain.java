@@ -1,8 +1,11 @@
-package codigo;
+package visao;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import modelo.Area;
+import modelo.Inimigo;
+import modelo.Jogador;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
@@ -180,8 +183,8 @@ public class DarkTextMain {
 	}
 
 	public static void escolherArea(Inimigo inimigo, Inimigo inimigo2, Area area) {
-		ImageIcon iconic = new ImageIcon("Floresta.jpeg");
-		ImageIcon iconici = new ImageIcon("Pantano.jpeg");
+		ImageIcon iconic = new ImageIcon("..\\DarkText\\src\\assets\\Floresta.jpeg");
+		ImageIcon iconici = new ImageIcon("..\\DarkText\\src\\assets\\Pantano.jpeg");
 		Integer op = Integer.MAX_VALUE;
 
 		if (area.getNova_area().equals("removido")) {
@@ -259,7 +262,7 @@ public class DarkTextMain {
 		inimigo.setVelocidade(inimigo2.getVelocidade());
 	}
 
-	public static void pantanoInimigo(Inimigo inimigo) {
+ 	public static void pantanoInimigo(Inimigo inimigo) {
 		Random random = new Random();
 		Integer op = random.nextInt(0, 101);
 
@@ -331,8 +334,8 @@ public class DarkTextMain {
 	}
 
 	public static void combate(Jogador jogador, Inimigo inimigo, int vitoria) {
-		ImageIcon mortepng = new ImageIcon("morte.jpeg");
-		ImageIcon vitoriapng = new ImageIcon("vitoria.jpeg");
+		ImageIcon mortepng = new ImageIcon("..\\DarkText\\src\\assets\\morte.jpeg");
+		ImageIcon vitoriapng = new ImageIcon("..\\DarkText\\src\\assets\\vitoria.jpeg");
 
 		vitoria = 2;
 
