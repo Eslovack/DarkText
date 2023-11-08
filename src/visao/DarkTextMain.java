@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import modelo.Area;
 import modelo.Inimigo;
+import modelo.Item;
 import modelo.Jogador;
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -17,14 +18,11 @@ public class DarkTextMain {
 		Scanner leitura = new Scanner(System.in);
 		Jogador jogador = new Jogador();
 		Inimigo inimigo = new Inimigo();
-		Inimigo inimigo2 = new Inimigo();
 		jogador.setCooldown2(0);
 		jogador.setOp(Integer.MAX_VALUE);
 		Area area = new Area();
 		area.setFloresta("");
 		area.setPantano("");
-		area.setNova_area("removido");
-		area.setNova_area_nome("");
 
 		while (jogador.getOp() != 0) {// ----------------------------------------------------------------
 			jogador.setOp(
@@ -34,93 +32,12 @@ public class DarkTextMain {
 				break;
 			}
 			jogador.setNome(JOptionPane.showInputDialog(null, "Qual seu nome"));
-
-			criativo(jogador, inimigo, inimigo2, area);
 			classe(jogador);
 			atributos(jogador, inimigo, "j");
-			while (vitoria != 1) {
-				escolherArea(inimigo, inimigo2, area);
-				atributos(jogador, inimigo, "i");
-				restaurar(jogador, inimigo, vitoria);
-				combate(jogador, inimigo, vitoria);
-			}
+			menu(jogador, inimigo, vitoria);
 		} // ----------------------------------------------------------------------------------
 
 		leitura.close();
-	}
-
-	public static void criativo(Jogador jogador, Inimigo inimigo, Inimigo inimigo2, Area area) {
-
-		Integer op = Integer.MAX_VALUE;
-		while (op != 0 && op != 1 && op != 2 && op != 3 && op != 4) {
-			op = Integer.valueOf(JOptionPane.showConfirmDialog(null, "Deseja utilizar o modo criativo"));
-			if (op == 0) {
-				op = Integer.valueOf(JOptionPane.showInputDialog(null,
-						"O que deseja fazer? \n 0-sair \n 1-alterar nome \n 2-listar os atributos de todos os inimigos \n 3-adicionar inimigo/Área \n 4-remover área"));
-
-				switch (op) {
-				case 0: {
-					break;
-				}
-				case 1: {
-					jogador.setNome(JOptionPane.showInputDialog("Qual seu novo nome"));
-					JOptionPane.showMessageDialog(null, "seu novo nome é " + jogador.getNome());
-					break;
-				}
-				case 2: {
-					JOptionPane.showMessageDialog(null,
-							"Nome - Capivara \n Vida - 80\n Mana - 0 \n Força - 12 \n Velocidade - 35");
-					JOptionPane.showMessageDialog(null,
-							"Nome - Lobo Guará \n Vida - 90\n Mana - 0 \n Força - 15 \n Velocidade - 70");
-					JOptionPane.showMessageDialog(null,
-							"Nome - Onça Pintada \n Vida - 100\n Mana - 0 \n Força - 20 \n Velocidade - 20");
-
-					JOptionPane.showMessageDialog(null,
-							"Nome - Sucuri \n Vida - 100\n Mana - 0 \n Força - 25 \n Velocidade - 45");
-					JOptionPane.showMessageDialog(null,
-							"Nome - Crocodilo \n Vida - 150\n Mana - 0 \n Força - 20 \n Velocidade - 50");
-					JOptionPane.showMessageDialog(null,
-							"Nome - Jacaré do papo amarelo \n Vida - 180\n Mana - 0 \n Força - 30 \n Velocidade - 50");
-					break;
-
-				}
-				case 3: {
-					area.setNova_area_nome(JOptionPane.showInputDialog(null, "Qual o nome da nova área?"));
-					area.setNova_area("");
-					inimigo2.setNome(JOptionPane.showInputDialog(null, "Qual o nome do novo inimigo?"));
-					inimigo2.setVida(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a vida do novo inimigo?")));
-					inimigo2.setVidaMax(inimigo2.getVida());
-					inimigo2.setForce(
-							Double.valueOf(JOptionPane.showInputDialog(null, "Qual a força do novo inimigo?")));
-					inimigo2.setMana(Double.valueOf(JOptionPane.showInputDialog(null, "Qual a mana do novo inimigo?")));
-					inimigo2.setManaMax(inimigo2.getMana());
-					inimigo2.setVelocidade(
-							Double.valueOf(JOptionPane.showInputDialog(null, "Qual a velocidade do novo inimigo?")));
-					inimigo2.setVelocidadeMax(inimigo2.getVelocidade());
-					area.setNova_area("");
-					break;
-				}
-				case 4: {
-					op = 0;
-					while (op != 1 && op != 2) {
-						op = Integer.valueOf(JOptionPane.showInputDialog(null,
-								"Qual área você deseja remover? \n 1-Floresta \n 2-Pantano"));
-						if (op == 1) {
-							area.setFloresta("removido");
-						} else if (op == 2) {
-							area.setPantano("removido");
-						} else {
-							JOptionPane.showInternalMessageDialog(null, "Opção errada");
-						}
-					}
-					break;
-				}
-				default:
-					JOptionPane.showInternalMessageDialog(null, "Opção errada");
-					break;
-				}
-			}
-		}
 	}
 
 	public static void classe(Jogador jogador) {
@@ -182,87 +99,90 @@ public class DarkTextMain {
 		}
 	}
 
-	public static void escolherArea(Inimigo inimigo, Inimigo inimigo2, Area area) {
-		ImageIcon iconic = new ImageIcon("..\\DarkText\\src\\assets\\Floresta.jpeg");
-		ImageIcon iconici = new ImageIcon("..\\DarkText\\src\\assets\\Pantano.jpeg");
-		Integer op = Integer.MAX_VALUE;
-
-		if (area.getNova_area().equals("removido")) {
-			while (op != 1 && op != 2) {
-				op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta "
-						+ area.getFloresta() + " \n 2-Pantano " + area.getPantano()));
-
-				switch (op) {
-				case 1:
-					if (area.getFloresta() != "removido") {
-						florestaInimigo(inimigo);
-						JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
-						JOptionPane.showMessageDialog(null,
-								"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
-					} else {
-						JOptionPane.showInternalMessageDialog(null, "Opção errada");
-						escolherArea(inimigo, inimigo2, area);
-					}
-
-					break;
-				case 2:
-					if (area.getPantano() != "removido") {
-						pantanoInimigo(inimigo);
-						JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
-					} else {
-						JOptionPane.showInternalMessageDialog(null, "Opção errada");
-						escolherArea(inimigo, inimigo2, area);
-					}
-					break;
-
-				default:
-					JOptionPane.showInternalMessageDialog(null, "Opção errada");
-					break;
+	public static void menu(Jogador jogador, Inimigo inimigo, int vitoria) {
+		int op = Integer.MAX_VALUE;
+		while (op != 1 || op != 2) {
+			op = Integer.valueOf(JOptionPane.showInputDialog("O que deseja fazer? \n 1-Inventario \n 2-Escolher Área"));
+			if (op == 1) {
+				Inventario(jogador, inimigo, vitoria);
+			} else if (op == 2) {
+				while (vitoria != 1) {
+					escolherArea(inimigo);
+					atributos(jogador, inimigo, "i");
+					restaurar(jogador, inimigo, vitoria);
+					combate(jogador, inimigo, vitoria);
 				}
-			}
-		} else {
-			while (op != 1 && op != 2 && op != 3) {
-				op = Integer.valueOf(
-						JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta " + area.getFloresta()
-								+ " \n 2-Pantano " + area.getPantano() + " \n 3-" + area.getNova_area_nome()));
 
-				switch (op) {
-				case 1:
-					florestaInimigo(inimigo);
-					JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
-					JOptionPane.showMessageDialog(null,
-							"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
-					break;
-				case 2:
-					pantanoInimigo(inimigo);
-
-					JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
-					break;
-				case 3:
-					novaArea(inimigo, inimigo2);
-					break;
-
-				default:
-					JOptionPane.showInternalMessageDialog(null, "Opção errada");
-					break;
-				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Você digitou errado");
 			}
 		}
 
 	}
 
-	public static void novaArea(Inimigo inimigo, Inimigo inimigo2) {
-		inimigo.setNome(inimigo2.getNome());
-		inimigo.setVidaMax(inimigo2.getVidaMax());
-		inimigo.setVida(inimigo2.getVida());
-		inimigo.setForce(inimigo2.getForce());
-		inimigo.setManaMax(inimigo2.getManaMax());
-		inimigo.setMana(inimigo2.getMana());
-		inimigo.setVelocidadeMax(inimigo2.getVelocidadeMax());
-		inimigo.setVelocidade(inimigo2.getVelocidade());
+	public static void Inventario(Jogador jogador, Inimigo inimigo, int vitoria) {
+		int op = Integer.MAX_VALUE;
+		while(true) {
+			op = Integer.valueOf(JOptionPane.showInputDialog("O que deseja fazer? \n 0-Voltar \n 1-Adicionar Item \n 2-Remover Item \n 3-Editar Item \n 4-Listar Item \n 5-Equipar Item"));
+			if(op == 0) {
+				menu(jogador, inimigo, vitoria);
+			}
+			if(op == 1) {
+				
+				Item item = new Item();
+				item.setNome(JOptionPane.showInputDialog("Qual o nome do item?"));
+				
+				while(true) {
+					op = Integer.valueOf(JOptionPane.showInputDialog("Qual atributo o item irá aumentar?\n 1- Vida \n 2-Mana \n 3-Força \n 4-Velocidade"));
+					switch(op) {
+					case 1:
+						item.setAtributo("vida");
+						break;
+					case 2:
+						item.setAtributo("mana");
+						break;
+					case 3:
+						item.setAtributo("forca");
+						break;
+					case 4:
+						item.setAtributo("");
+					}
+				}
+				
+				//item.setModificador(Double.valueOf(JOptionPane.showInputDialog("Qual o valor do aumento do atributo?")));
+			}
+		}
+		
 	}
 
- 	public static void pantanoInimigo(Inimigo inimigo) {
+	public static void escolherArea(Inimigo inimigo) {
+		ImageIcon iconic = new ImageIcon("..\\DarkText\\src\\assets\\Floresta.jpeg");
+		ImageIcon iconici = new ImageIcon("..\\DarkText\\src\\assets\\Pantano.jpeg");
+		Integer op = Integer.MAX_VALUE;
+
+		while (op != 1 && op != 2) {
+			op = Integer.valueOf(JOptionPane.showInputDialog("Aonde deseja se aventurar? \n 1-Floresta \n 2-Pantano "));
+
+			switch (op) {
+			case 1:
+				florestaInimigo(inimigo);
+				JOptionPane.showMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconic);
+				JOptionPane.showMessageDialog(null,
+						"Enquanto se aventurava pela floresta, você encontrou um " + inimigo.getNome());
+				break;
+			case 2:
+				pantanoInimigo(inimigo);
+				JOptionPane.showInternalMessageDialog(null, "", null, JOptionPane.INFORMATION_MESSAGE, iconici);
+				break;
+
+			default:
+				JOptionPane.showInternalMessageDialog(null, "Opção errada");
+				break;
+			}
+		}
+	}
+
+	public static void pantanoInimigo(Inimigo inimigo) {
 		Random random = new Random();
 		Integer op = random.nextInt(0, 101);
 
