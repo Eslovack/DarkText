@@ -1,13 +1,10 @@
 package modelo;
 
-import java.util.ArrayList;
-
 public class Item {
 	private int id;
 	private String nome;
 	private Double modificador;
 	private String atributo;
-	//private ArrayList<Item> itens;
 	
 	
 	public String getNome() {
