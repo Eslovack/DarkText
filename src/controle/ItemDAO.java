@@ -8,9 +8,7 @@ import modelo.Item;
 
 public class ItemDAO implements IItemDAO {
 
-	public void adicionarItem(Item item, Inventario inventario) {
-		ArrayList<Item> itens = new ArrayList<>();
-		itens.add(item);
+	public void adicionarItem(Inventario inventario ,ArrayList<Item> itens) {
 		inventario.setItens(itens);
 		
 	}
@@ -20,8 +18,9 @@ public class ItemDAO implements IItemDAO {
 		
 	}
 
-	public void alterarItem() {
-
+	public void listarItem(Inventario inventario,Item item) {
+			
+		
 		
 	}
 

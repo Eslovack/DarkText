@@ -12,5 +12,5 @@ public class Inventario {
 	public void setItens(ArrayList<Item> itens) {
 		this.itens = itens;
 	}
-
+	
 }
