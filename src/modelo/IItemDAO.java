@@ -6,9 +6,9 @@ public interface IItemDAO {
 	
 	public void adicionarItem(Inventario inventario, ArrayList<Item> itens);
 	
-	public void removerItem();
+	public void removerItem(Inventario inventario);
 	
-	public void listarItem(Inventario inventario, Item item);
+	public void listarItem(Inventario inventario, ArrayList<Item> itens);
 	
 	public void editarItem();
 

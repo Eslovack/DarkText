@@ -2,9 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Inventario {
+public class Inventario {	
 	private ArrayList<Item> itens;
-
+	
 	public ArrayList<Item> getItens() {
 		return itens;
 	}

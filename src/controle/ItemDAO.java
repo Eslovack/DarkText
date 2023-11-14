@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import modelo.IItemDAO;
 import modelo.Inventario;
@@ -13,14 +14,20 @@ public class ItemDAO implements IItemDAO {
 		
 	}
 
-	public void removerItem() {
-
+	public void removerItem(Inventario inventario) {
+		
 		
 	}
 
-	public void listarItem(Inventario inventario,Item item) {
-			
+	public void listarItem(Inventario inventario, ArrayList<Item> itens) {
 		
+		for (Item listar : itens) {
+			System.out.println(listar.getId());
+			System.out.println(listar.getNome());
+			System.out.println(listar.getAtributo());
+			System.out.println(listar.getModificador());
+			
+		}
 		
 	}
 

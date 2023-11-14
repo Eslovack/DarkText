@@ -106,9 +106,8 @@ public class DarkTextMain {
 			if (op == 1) {
 				Inventario inventario = new Inventario();
 				ItemDAO dao = new ItemDAO();
-				Item item = new Item();
-				item.setId(0);
-				Inventario(jogador, inimigo, vitoria, itens,item,inventario, dao);
+				int id =0;
+				Inventario(jogador, inimigo, vitoria, itens,id,inventario, dao);
 			} else if (op == 2) {
 				while (vitoria != 1) {
 					escolherArea(inimigo);
@@ -124,18 +123,26 @@ public class DarkTextMain {
 
 	}
 
-	public static void Inventario(Jogador jogador, Inimigo inimigo, int vitoria, ArrayList<Item> itens,Item item, Inventario inventario, ItemDAO dao) {
+	public static void Inventario(Jogador jogador, Inimigo inimigo, int vitoria, ArrayList<Item> itens,int id, Inventario inventario, ItemDAO dao) {
 		int op = Integer.MAX_VALUE;
 		while(true) {
 			
+			Item t = new Item();
 			op = Integer.valueOf(JOptionPane.showInputDialog("O que deseja fazer? \n 0-Voltar \n 1-Adicionar Item \n 2-Remover Item \n 3-Editar Item \n 4-Listar Item \n 5-Equipar Item"));
 			if(op == 0) {
 				menu(jogador, inimigo, vitoria,itens);
 			}
 			if(op == 1) {
+				if (itens.size()==0) {
+					id= 1;
+				}else {
+					t = itens.get(itens.size()-1);
+					id = t.getId()+1;
+				}
 				
 				op = Integer.MAX_VALUE;
-				item.setId(item.getId()+1);
+				Item item = new Item();
+				item.setId(id);
 				item.setNome(JOptionPane.showInputDialog("Qual o nome do item?"));
 				
 				while(op != 1 && op != 2 && op != 3 && op != 4) {
@@ -159,29 +166,18 @@ public class DarkTextMain {
 					
 					}
 				}
-				
 				item.setModificador(Double.valueOf(JOptionPane.showInputDialog("Qual o valor do aumento do atributo?")));
-				
 				itens.add(item);
 				dao.adicionarItem(inventario,itens);
-				
-				
-				
-				
+	
 			}else if(op == 2) {
+				
 				
 			} else if(op == 3) {
 				
 			} else if(op == 4) {
-				/*
-				for (Item listar : itens) {
-					System.out.println(listar.getId());
-					System.out.println(listar.getNome());
-					System.out.println(listar.getAtributo());
-					System.out.println(listar.getModificador());
-				}
-				*/
-				
+				// BOTAR NO JOPITIONPANE
+				dao.listarItem(inventario, itens);
 			}
 		}
 	}
