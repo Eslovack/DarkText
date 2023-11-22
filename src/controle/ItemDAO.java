@@ -3,6 +3,8 @@ package controle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 import modelo.IItemDAO;
 import modelo.Inventario;
 import modelo.Item;
@@ -22,10 +24,7 @@ public class ItemDAO implements IItemDAO {
 	public void listarItem(Inventario inventario, ArrayList<Item> itens) {
 		
 		for (Item listar : itens) {
-			System.out.println(listar.getId());
-			System.out.println(listar.getNome());
-			System.out.println(listar.getAtributo());
-			System.out.println(listar.getModificador());
+			JOptionPane.showMessageDialog(null, "\n" + listar.getNome() + "\n" + listar.getAtributo() + listar.getModificador() );
 			
 		}
 		
