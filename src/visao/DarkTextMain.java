@@ -171,12 +171,33 @@ public class DarkTextMain {
 				dao.adicionarItem(inventario,itens);
 	
 			}else if(op == 2) {
+				String op1;
+				int excluir = -1;
+				int i = 0;
 				
+				op1 = JOptionPane.showInputDialog(null, "Digite o nome do item a ser excluido"); 
+				for (Item listar : itens) {
+					if(listar.getNome().equals(op1) ) {
+						excluir = i;
+					}
+					i++;
+				}
+				if( excluir >= 0) {
+					itens.remove(excluir);
+				}
+				dao.adicionarItem(inventario, itens);
 				
 			} else if(op == 3) {
+				String op1;
 				
+				op1 = JOptionPane.showInputDialog(null, "Digite o nome do item a ser editado"); 
+				for (Item listar : itens) {
+					if(listar.getNome().equals(op1) ) {
+						listar.setModificador(Double.valueOf(JOptionPane.showInputDialog(null, "Digite o novo modificador do item")));
+					}
+				}
+				dao.adicionarItem(inventario, itens);
 			} else if(op == 4) {
-				// BOTAR NO JOPITIONPANE
 				dao.listarItem(inventario, itens);
 			}
 		}

@@ -24,7 +24,7 @@ public class ItemDAO implements IItemDAO {
 	public void listarItem(Inventario inventario, ArrayList<Item> itens) {
 		
 		for (Item listar : itens) {
-			JOptionPane.showMessageDialog(null, "\n" + listar.getNome() + "\n" + listar.getAtributo() + listar.getModificador() );
+			JOptionPane.showMessageDialog(null, listar.getId() + "\n" + listar.getNome() + "\n" + listar.getAtributo() + "\n"+listar.getModificador() );
 			
 		}
 		
