@@ -7,7 +7,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import modelo.Jogador;
 import modelo.Inimigo;
-import modelo.Inventario;
 import modelo.Item;
 import controle.ItemDAO;
 
@@ -20,7 +19,6 @@ public class DarkTextMain {
 		Scanner leitura = new Scanner(System.in);
 		Jogador jogador = new Jogador();
 		Inimigo inimigo = new Inimigo();
-		ArrayList<Item> itens = new ArrayList<>();
 		jogador.setCooldown2(0);
 		jogador.setOp(Integer.MAX_VALUE);
 		
@@ -34,7 +32,7 @@ public class DarkTextMain {
 			jogador.setNome(JOptionPane.showInputDialog(null, "Qual seu nome"));
 			classe(jogador);
 			atributos(jogador, inimigo, "j");
-			menu(jogador, inimigo, vitoria,itens);
+			menu(jogador, inimigo, vitoria);
 		} // ----------------------------------------------------------------------------------
 
 		leitura.close();
@@ -84,6 +82,7 @@ public class DarkTextMain {
 		}
 	}
 
+	
 	public static void atributos(Jogador jogador, Inimigo inimigo, String op) {
 		if (op == "j") {
 			JOptionPane.showMessageDialog(null,
@@ -99,15 +98,15 @@ public class DarkTextMain {
 		}
 	}
 
-	public static void menu(Jogador jogador, Inimigo inimigo, int vitoria, ArrayList<Item> itens) {
+	
+	public static void menu(Jogador jogador, Inimigo inimigo, int vitoria) {
 		int op = Integer.MAX_VALUE;
 		while (op != 1 || op != 2) {
 			op = Integer.valueOf(JOptionPane.showInputDialog("O que deseja fazer? \n 1-Inventario \n 2-Escolher Área"));
 			if (op == 1) {
-				Inventario inventario = new Inventario();
-				ItemDAO dao = new ItemDAO();
+				ItemDAO dao = ItemDAO.getInstancia();
 				int id =0;
-				Inventario(jogador, inimigo, vitoria, itens,id,inventario, dao);
+				Inventario(jogador, inimigo, vitoria,id, dao);
 			} else if (op == 2) {
 				while (vitoria != 1) {
 					escolherArea(inimigo);
@@ -123,22 +122,16 @@ public class DarkTextMain {
 
 	}
 
-	public static void Inventario(Jogador jogador, Inimigo inimigo, int vitoria, ArrayList<Item> itens,int id, Inventario inventario, ItemDAO dao) {
+	public static void Inventario(Jogador jogador, Inimigo inimigo, int vitoria,int id, ItemDAO dao) {
 		int op = Integer.MAX_VALUE;
 		while(true) {
 			
 			Item t = new Item();
 			op = Integer.valueOf(JOptionPane.showInputDialog("O que deseja fazer? \n 0-Voltar \n 1-Adicionar Item \n 2-Remover Item \n 3-Editar Item \n 4-Listar Item \n 5-Equipar Item"));
 			if(op == 0) {
-				menu(jogador, inimigo, vitoria,itens);
+				menu(jogador, inimigo, vitoria);
 			}
 			if(op == 1) {
-				if (itens.size()==0) {
-					id= 1;
-				}else {
-					t = itens.get(itens.size()-1);
-					id = t.getId()+1;
-				}
 				
 				op = Integer.MAX_VALUE;
 				Item item = new Item();
@@ -167,38 +160,21 @@ public class DarkTextMain {
 					}
 				}
 				item.setModificador(Double.valueOf(JOptionPane.showInputDialog("Qual o valor do aumento do atributo?")));
-				itens.add(item);
-				dao.adicionarItem(inventario,itens);
+				dao.adicionarItem(item);
 	
 			}else if(op == 2) {
 				String op1;
-				int excluir = -1;
-				int i = 0;
 				
 				op1 = JOptionPane.showInputDialog(null, "Digite o nome do item a ser excluido"); 
-				for (Item listar : itens) {
-					if(listar.getNome().equals(op1) ) {
-						excluir = i;
-					}
-					i++;
-				}
-				if( excluir >= 0) {
-					itens.remove(excluir);
-				}
-				dao.adicionarItem(inventario, itens);
+				dao.removerItem(op1);
 				
 			} else if(op == 3) {
 				String op1;
-				
 				op1 = JOptionPane.showInputDialog(null, "Digite o nome do item a ser editado"); 
-				for (Item listar : itens) {
-					if(listar.getNome().equals(op1) ) {
-						listar.setModificador(Double.valueOf(JOptionPane.showInputDialog(null, "Digite o novo modificador do item")));
-					}
-				}
-				dao.adicionarItem(inventario, itens);
+				dao.editarItem(op1);
+				
 			} else if(op == 4) {
-				dao.listarItem(inventario, itens);
+				dao.listarItem();
 			}
 		}
 	}

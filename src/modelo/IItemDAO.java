@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public interface IItemDAO {
 	
-	public void adicionarItem(Inventario inventario, ArrayList<Item> itens);
+	public void adicionarItem(Item item);
 	
-	public void removerItem(Inventario inventario);
+	public void removerItem(String op1);
 	
-	public void listarItem(Inventario inventario, ArrayList<Item> itens);
+	public void listarItem();
 	
-	public void editarItem();
+	public void editarItem(String op1);
 
 }
